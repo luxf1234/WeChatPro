@@ -1,0 +1,83 @@
+<!--pages/info/info.wxml-->
+<form bindsubmit="formSubmit">
+<view class='container'>
+  <view class='photo' bindtap='chooseImage'>
+    <image class='' src='{{imageurl}}'/>
+  </view>
+  <view class='list'>
+    <view class='section'>
+      <view class='section_title'>{{parms[0].Content}}：</view>
+      <picker bindchange="bindPickerChange" value="{{index}}"  range="{{xqArray}}"  range-key="{{'Xq'}}">
+        <view class="picker">
+          {{xqArray[index].Xq}}
+        </view>
+      </picker>
+    </view>
+    <view class='section'>
+      <view class='section_title'>{{parms[1].Content}}：</view>
+      <input type='text' name='name' value='{{forminfo}}' confirm-type='next' placeholder='{{parms[1].Placeholder}}' placeholder-class='p_class'></input>
+    </view>
+    <view class='section'>
+      <view class='section_title'>{{parms[2].Content}}：</view>
+      <input type='number' name='tel' value='{{forminfo}}' placeholder='{{parms[2].Placeholder}}' placeholder-class='p_class'></input>
+    </view>
+    <view class='section'>
+      <view class='section_title'>{{parms[3].Content}}：</view>
+      <input type='idcard' name='idcard' value='{{forminfo}}' placeholder='{{parms[3].Placeholder}}' placeholder-class='p_class'></input>
+    </view>
+    <view class='section'>
+      <view class='section_title'>{{parms[4].Content}}：</view>
+      <input type='text' name='carnum' value='{{carnum}}' bindtap='car_input'  bindblur='blur_out' disabled='true' placeholder='{{parms[4].Placeholder}}' placeholder-class='p_class'></input>
+    </view>
+    <view class='section'>
+      <view class='section_title'>{{parms[5].Content}}：</view>
+      <input type='text' name='addr' value='{{forminfo}}' confirm-type='next' placeholder='{{parms[5].Placeholder}}' placeholder-class='p_class'></input>
+    </view>
+     <view class='section'>
+      <view class='section_title'>{{parms[6].Content}}：</view>
+      <input type='text' name='relationship' value='{{forminfo}}' confirm-type='next' placeholder='{{parms[6].Placeholder}}' placeholder-class='p_class'/>
+    </view>
+    <view class='section' hidden="{{(parms[7].Isshow==1)?false:true}}">
+      <view class='section_title'>{{parms[7].Content}}：</view>
+      <switch  bindchange="switch_outcoming"></switch>
+      <view class='tips' style="color:{{(outcoming==1)?'red':'#C0C0C0'}}">{{txt_outcoming}}</view>
+    </view>
+   
+    <view class='section' hidden="{{(parms[8].Isshow=='1')?false:true}}">
+      <view class='section_title'>{{parms[8].Content}}：</view>
+      <switch  bindchange="switch_identical"></switch>
+      <view class='tips' style="color:{{(identical==1)?'red':'#C0C0C0'}}">{{txt_identical}}</view>
+    </view>
+    <view class='section' hidden="{{(parms[9].Isshow==1)?false:true}}">
+      <view class='section_title'>{{parms[9].Content}}：</view>
+       <switch bindchange="switch_empty"></switch>
+        <view class='tips' style="color:{{(empty==1)?'red':'#C0C0C0'}}">{{txt_empty}}</view>
+    </view>
+    <view class='section'>
+      <button form-type='submit' class='button_left'>提交</button>
+      <button bindtap='reset' class='button_right'>重置</button>
+    </view>
+  </view>
+</view>
+<modal hidden="{{hidden}}" title="重置数据提示" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" no-cancel="{{nocancel}}">
+    您确定要重置输入的数据？
+</modal>
+</form>
+<view class='keyboard' catchtap='stoppropagation'>
+  <!-- 省键盘 -->
+  <view class="provinces" hidden='{{hiddenPro}}'>
+    <view class="pro-li fl" wx:for="{{provinceArr}}" catchtap='proTap' data-province="{{item}}">{{item}}</view>
+    <view class="bot fl">
+    <view class='kb-icon kb-hide fl pro-li' catchtap='backhide'>关闭</view>
+    </view>
+  </view>
+  <!-- 号码键盘	 -->
+  <view class="keyNums" hidden='{{hiddenStr}}'>
+    <view class="pro-li fl" wx:for="{{strArr}}" catchtap='strTap' data-str="{{item}}">{{item}}</view>
+    <view class="bot fl">
+      <view class='kb-icon kb-hide fl pro-li' catchtap='backKeyboard'>返回</view>
+      <view class='kb-icon kb-hide fl pro-li' catchtap='backSpace'>删除</view>
+      <view class='kb-icon kb-hide fl pro-li' catchtap='backhide'>关闭</view>
+    </view>
+  </view>
+</view>

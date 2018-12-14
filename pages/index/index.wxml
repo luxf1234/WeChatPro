@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">欢迎回来!\n{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class='menu'>
+  <view class='menu_list'>
+  <view class="kind-list-item">
+          <view  class="kind-list-item-hd" bindtap="goin">
+            <view class="kind-list-text">信息录入</view>
+            <image class="kind-list-img" src="/images/sample.png"></image>
+          </view>
+          </view>
+</view>
+</view>
+</view>
